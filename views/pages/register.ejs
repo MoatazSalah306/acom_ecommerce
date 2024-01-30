@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acom - Register</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+      :root {
+        --red: hsl(0, 100%, 74%);
+        --green: hsl(154, 59%, 51%);
+        --blue: hsl(248, 32%, 49%);
+        --dark-blue: hsl(249, 10%, 26%);
+        --grayish-blue: hsl(246, 25%, 77%);
+        --white: white;
+        --body-font: "Poppins", sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        -ms-overflow-style: none; /* for Internet Explorer, Edge */
+        scrollbar-width: none; /* for Firefox */
+        overflow-y: scroll;
+        box-sizing: border-box;
+        font-family: var(--body-font);
+        min-height: 100vh;
+        background-image: url("images/bg-intro-desktop.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-color: var(--red);
+        background-position: center;
+      }
+
+      body::-webkit-scrollbar {
+        display: none; /* for Chrome, Safari, and Opera */
+      }
+
+      .main-container {
+        margin: 0 auto;
+        max-width: 1105px;
+        width: 90%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: 7.5rem;
+        grid-gap: 1.4rem;
+      }
+
+      /* Info Section */
+
+      .info-section {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        color: var(--white);
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .info-section h1 {
+        font-size: 3rem;
+        line-height: 3rem;
+      }
+
+      .info-section p {
+        font-weight: 500;
+      }
+
+      /** Form Section */
+      .form-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1.3rem;
+        width: 100%;
+      }
+
+      .sales-btn {
+        border-radius: 10px;
+        border-width: 1px;
+        border-color: transparent;
+        border-style: solid;
+        cursor: pointer;
+        background-color: var(--blue);
+        color: var(--white);
+        font-weight: 700;
+        font-size: 1rem;
+        padding: 1.3rem 1rem;
+        box-shadow: 0px 9px 5px -1px rgba(0, 0, 0, 0.27);
+        -webkit-box-shadow: 0px 9px 5px -1px rgba(0, 0, 0, 0.27);
+        -moz-box-shadow: 0px 9px 5px -1px rgba(0, 0, 0, 0.27);
+      }
+      .sales-btn span {
+        font-weight: 400;
+      }
+      /* Form */
+      .main-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.3rem;
+        background-color: var(--white);
+        border-radius: 10px;
+        padding: 2.5rem 2.7rem;
+        box-shadow: 0px 9px 5px -1px rgba(0, 0, 0, 0.27);
+        -webkit-box-shadow: 0px 9px 5px -1px rgba(0, 0, 0, 0.27);
+        -moz-box-shadow: 0px 9px 5px -1px rgba(0, 0, 0, 0.27);
+      }
+
+      .main-form .input-field {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      input {
+        padding: 1.2rem;
+        border-radius: 5px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: var(--grayish-blue);
+        opacity: 0.8;
+        font-family: var(--body-font);
+        padding-left: 1rem;
+      }
+
+      input::placeholder {
+        font-weight: 700;
+        font-size: 0.9rem;
+        font-family: var(--body-font);
+      }
+      input:focus-visible {
+        outline-width: 1px;
+        outline-style: solid;
+        outline-color: var(--blue);
+      }
+
+      /* Labels */
+
+      .name-label,
+      .address-label,
+      .email-label,
+      .pass-label {
+        text-align: right;
+        font-size: 0.7rem;
+        font-weight: 500;
+        color: var(--red);
+        font-style: italic;
+      }
+
+      .success-msg {
+        text-align: center;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: var(--green);
+        font-style: italic;
+      }
+
+      /* Error Icon */
+      .first-name-error,
+      .address-error,
+      .user-email-error,
+      .user-pass-error {
+        display: none;
+        right: 3%;
+        top: 25%;
+        position: absolute;
+        align-items: right;
+        background-image: url("images/icon-error.svg");
+        background-repeat: no-repeat;
+        height: 2.5rem;
+        width: 2.5rem;
+      }
+
+      .submit-info {
+        border-radius: 5px;
+        border-width: 1px;
+        border-color: transparent;
+        border-style: solid;
+        cursor: pointer;
+        background-color: var(--green);
+        color: var(--white);
+        text-transform: uppercase;
+        padding: 1.2rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all ease-in-out 0.3s;
+      }
+
+      .tnc {
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: var(--grayish-blue);
+        text-align: center;
+      }
+
+      .tnc a {
+        text-decoration: none;
+        color: var(--red);
+        font-weight: 600;
+      }
+
+      @media (hover: hover) {
+        .submit-info:hover {
+          opacity: 0.7;
+          transition: all ease-in-out 0.2s;
+        }
+      }
+
+      @media screen and (max-width: 801px) {
+        body {
+          background-image: url("images/bg-intro-mobile.png");
+        }
+        .main-container {
+          grid-template-columns: 1fr;
+          margin-bottom: 5rem;
+        }
+        .info-section {
+          text-align: center;
+        }
+
+        .info-section h1 {
+          font-size: 2.5rem;
+        }
+      }
+
+    
+    </style>
+  </head>
+  <body>
+    <!-- Main Container -->
+    <main class="main-container">
+      <!-- Info Section -->
+      <section class="info-section">
+        <h1>Get anything you want from us</h1>
+        <p>
+          here in Acom store (website) you can find anything you need.<br>
+          you can find here clothes and accesories and home needs and else
+          register now and start exploring.
+        </p>
+      </section>
+      <section class="form-section">
+        <button class="sales-btn">
+          Welcome to Acom <span>Let's Start A New Journey</span>
+        </button>
+        <!-- Form -->
+        <form id="form" class="main-form" method="post" action="/manage_register" enctype="multipart/form-data">
+          <!-- Avatar -->
+          <div class="input-field">
+            <input type="file" name="avatar"/>
+          </div>
+          <!-- Username-->
+          <div class="input-field">
+            <input
+              class="first-name"
+              id="first-name"
+              type="text"
+              placeholder="Your Name"
+              name="customer_name"
+            />
+            <div class="first-name-error"></div>
+            <label for="first-name" class="name-label"></label>
+          </div>
+          <!-- Address -->
+          <div class="input-field">
+            <input class="address" type="text" placeholder="Your Address" name="address"/>
+            <div class="address-error"></div>
+            <label for="address" class="address-label"></label>
+          </div>
+          <!-- Email -->
+          <div class="input-field">
+            <input
+              class="user-email"
+              type="email"
+              placeholder="Email Address"
+              name="email"
+            />
+            <div class="user-email-error"></div>
+            <label for="user-email" class="email-label"></label>
+          </div>
+          <!-- Password -->
+          <div class="input-field">
+            <input class="user-pass" type="password" placeholder="Password" name="password"/>
+            <div class="user-pass-error"></div>
+            <label for="user-pass" class="pass-label"></label>
+          </div>
+          <div class="input-field">
+            <button class="submit-info" id="submit-info" type="submit">
+              Register Now
+            </button>
+            <label for="submit-info" class="success-msg"></label>
+          </div>
+          <div style="display: flex;position: relative;margin-bottom: 1.2rem;">
+            <p style="left: 0;position: absolute;color: #6055A5;">Already Have An Account ? </p>
+            <a href="/" style="right: 0;position: absolute;color: #FF7A7A;text-decoration: none;">Login</a>
+          </div>
+          <label class="tnc" for="submit-info">
+            By clicking the button, you are agreeing to our
+            <a href="">Terms and Services</a>
+          </label>
+        </form>
+      </section>
+    </main>
+
+    <script>
+
+      const form = document.getElementById("form");
+      const submitBtn = document.getElementById("submit-info");
+      //USERNAME
+      const userName = document.querySelector(".first-name");
+      const nameLabel = document.querySelector(".name-label");
+      const nameError = document.querySelector(".first-name-error");
+      //ADDRESS
+      const userAddress = document.querySelector(".address");
+      const addressLabel = document.querySelector(".address-label");
+      const addressError = document.querySelector(".address-error");
+      //EMAIL
+      const userEmail = document.querySelector(".user-email");
+      const emailLabel = document.querySelector(".email-label");
+      const emailError = document.querySelector(".user-email-error");
+
+      //PASS
+      const userPass = document.querySelector(".user-pass");
+      const passLabel = document.querySelector(".pass-label");
+      const passError = document.querySelector(".user-pass-error");
+
+      const successMsg = document.querySelector(".success-msg");
+
+      let emailValidation = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      let passValidation = /^[A-Za-z]\w{7,14}$/;
+
+      let errorFunc = function () {
+        if (userName.value.length === 0) {
+          nameLabel.textContent = "First Name cannot be empty";
+          userName.style.borderColor = "red";
+          nameError.style.display = "inline";
+        }
+        if (userAddress.value.length === 0) {
+          addressLabel.textContent = "Address cannot be empty";
+          userAddress.style.borderColor = "red";
+          addressError.style.display = "inline";
+        }
+        if (userName.value.length > 0) {
+          nameLabel.textContent = "";
+          userName.style.borderColor = "var(--grayish-blue)";
+          nameError.style.display = "none";
+        }
+        if (userAddress.value.length > 0) {
+          addressLabel.textContent = "";
+          userAddress.style.borderColor = "var(--grayish-blue)";
+          addressError.style.display = "none";
+        }
+        if (userEmail.value.length === 0) {
+          emailLabel.textContent = "Email cannot be empty";
+          userEmail.style.borderColor = "red";
+          emailError.style.display = "inline";
+        }
+        if (
+          !userEmail.value.match(emailValidation) &&
+          userEmail.value.length !== 0
+        ) {
+          emailLabel.textContent = "Looks like this is not an email";
+          userEmail.style.borderColor = "red";
+          emailError.style.display = "inline";
+        }
+        if (userEmail.value.match(emailValidation)) {
+          emailLabel.textContent = "";
+          userEmail.style.borderColor = "var(--grayish-blue)";
+          emailError.style.display = "none";
+        }
+        if (userPass.value.length === 0) {
+          passLabel.textContent = "Password cannot be empty";
+          userPass.style.borderColor = "red";
+          passError.style.display = "inline";
+        }
+        if (
+          !userPass.value.match(passValidation) &&
+          userPass.value.length !== 0
+        ) {
+          passLabel.textContent =
+            "A password must be between 7-16 characters that starts with a letter(Only letters, numbers & underscore)";
+          userPass.style.borderColor = "red";
+          passError.style.display = "inline";
+        }
+        if (userPass.value.match(passValidation)) {
+          passLabel.textContent = "";
+          userPass.style.borderColor = "var(--grayish-blue)";
+          passError.style.display = "none";
+        }
+        if (
+          userName.value.length > 0 &&
+          userAddress.value.length > 0 &&
+          userEmail.value.match(emailValidation) &&
+          userPass.value.match(passValidation)
+        ) {
+          form.submit();
+        } else {
+          console.log("Unkown error");
+        }
+      };
+
+      //CLick with mouse
+      submitBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        errorFunc();
+      });
+
+      //Click with Enter
+      userName.addEventListener("keyup", function (e) {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          errorFunc();
+        }
+      });
+
+      userAddress.addEventListener("keyup", function (e) {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          errorFunc();
+        }
+      });
+
+      userEmail.addEventListener("keyup", function (e) {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          errorFunc();
+        }
+      });
+
+      userPass.addEventListener("keyup", function (e) {
+        if (e.keyCode === 13) {
+          e.preventDefault();
+          errorFunc();
+        }
+      });
+    </script>
+  </body>
+</html>

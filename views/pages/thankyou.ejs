@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acom - Thank You</title>
+    <link rel="stylesheet" href="css/style-prefix.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .card {
+        overflow: hidden;
+        position: relative;
+        text-align: left;
+        border-radius: 0.5rem;
+        max-width: 290px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        background-color: #fff;
+      }
+
+      .avatar {
+        width: 50px;
+        height: 50px; /* Ensure height matches width for a perfect circle */
+        border-radius: 50%;
+        overflow: hidden;
+      }
+
+      .header {
+        padding: 1.25rem 1rem 1rem 1rem;
+      }
+
+      .image {
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #e2feee;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 9999px;
+        animation: animate 0.6s linear alternate-reverse infinite;
+        transition: 0.6s ease;
+      }
+
+      .image svg {
+        color: #0afa2a;
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .content {
+        margin-top: 0.75rem;
+        text-align: center;
+      }
+
+      .title {
+        color: #066e29;
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.5rem;
+      }
+
+      .message {
+        margin-top: 0.5rem;
+        color: #595b5f;
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }
+
+      .actions {
+        margin: 0.75rem 1rem;
+      }
+
+      .history {
+        display: inline-flex;
+        padding: 0.5rem 1rem;
+        background-color: #1aa06d;
+        color: #ffffff;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: 500;
+        justify-content: center;
+        width: 100%;
+        border-radius: 0.375rem;
+        border: none;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      }
+
+      .track {
+        display: inline-flex;
+        margin-top: 0.75rem;
+        padding: 0.5rem 1rem;
+        color: #242525;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        font-weight: 500;
+        justify-content: center;
+        width: 100%;
+        border-radius: 0.375rem;
+        border: 1px solid #d1d5db;
+        background-color: #fff;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      }
+
+      @keyframes animate {
+        from {
+          transform: scale(1);
+        }
+
+        to {
+          transform: scale(1.09);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <!--navbar-->
+    <header>
+      <div class="header-main">
+        <div class="container">
+          <a
+            href="/home"
+            class="header-logo"
+            style="display: flex; justify-content: center"
+          >
+            <p
+              style="
+                font-weight: 600;
+                font-size: xx-large;
+                color: hsl(353, 100%, 78%);
+              "
+            >
+              A <span style="color: black">com</span>
+            </p>
+          </a>
+
+          <div class="header-user-actions">
+            <a href="/account" class="action-btn">
+              <% if(avatar==null){ %>
+              <ion-icon name="person-outline"></ion-icon>
+              <% }else{ %>
+                <img class="avatar" src="uploads/<%= avatar %>" />
+
+              <% } %>
+            </a>
+
+            <button class="action-btn">
+              <ion-icon name="heart-outline"></ion-icon>
+              <span class="count">0</span>
+            </button>
+
+            <a href="/cart" class="action-btn">
+              <ion-icon name="bag-handle-outline"></ion-icon>
+              <span class="count">0</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-bottom-navigation">
+        <a href="/cart" class="action-btn">
+          <ion-icon name="bag-handle-outline"></ion-icon>
+
+          <span class="count">0</span>
+        </a>
+
+        <a href="/home" class="action-btn">
+          <ion-icon name="home-outline"></ion-icon>
+        </a>
+
+        <button class="action-btn">
+          <ion-icon name="heart-outline"></ion-icon>
+
+          <span class="count">0</span>
+        </button>
+      </div>
+
+      <nav class="mobile-navigation-menu has-scrollbar" data-mobile-menu>
+        <div class="menu-top">
+          <h2 class="menu-title">Menu</h2>
+
+          <button class="menu-close-btn" data-mobile-menu-close-btn>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+
+        <ul class="mobile-menu-category-list">
+          <li class="menu-category">
+            <a href="#" class="menu-title">Home</a>
+          </li>
+
+          <li class="menu-category">
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Men's</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Shirt</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Shorts & Jeans</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Safety Shoes</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Wallet</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-category">
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Women's</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Dress & Frock</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Earrings</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Necklace</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Makeup Kit</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-category">
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Jewelry</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Earrings</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Couple Rings</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Necklace</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Bracelets</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-category">
+            <button class="accordion-menu" data-accordion-btn>
+              <p class="menu-title">Perfume</p>
+
+              <div>
+                <ion-icon name="add-outline" class="add-icon"></ion-icon>
+                <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+              </div>
+            </button>
+
+            <ul class="submenu-category-list" data-accordion>
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Clothes Perfume</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Deodorant</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Flower Fragrance</a>
+              </li>
+
+              <li class="submenu-category">
+                <a href="#" class="submenu-title">Air Freshener</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="menu-category">
+            <a href="#" class="menu-title">Blog</a>
+          </li>
+
+          <li class="menu-category">
+            <a href="#" class="menu-title">Hot Offers</a>
+          </li>
+        </ul>
+
+        <div class="menu-bottom">
+          <ul class="menu-category-list">
+            <li class="menu-category">
+              <button class="accordion-menu" data-accordion-btn>
+                <p class="menu-title">Language</p>
+
+                <ion-icon
+                  name="caret-back-outline"
+                  class="caret-back"
+                ></ion-icon>
+              </button>
+
+              <ul class="submenu-category-list" data-accordion>
+                <li class="submenu-category">
+                  <a href="#" class="submenu-title">English</a>
+                </li>
+
+                <li class="submenu-category">
+                  <a href="#" class="submenu-title">Espa&ntilde;ol</a>
+                </li>
+
+                <li class="submenu-category">
+                  <a href="#" class="submenu-title">Fren&ccedil;h</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="menu-category">
+              <button class="accordion-menu" data-accordion-btn>
+                <p class="menu-title">Currency</p>
+                <ion-icon
+                  name="caret-back-outline"
+                  class="caret-back"
+                ></ion-icon>
+              </button>
+
+              <ul class="submenu-category-list" data-accordion>
+                <li class="submenu-category">
+                  <a href="#" class="submenu-title">USD &dollar;</a>
+                </li>
+
+                <li class="submenu-category">
+                  <a href="#" class="submenu-title">EUR &euro;</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+
+          <ul class="menu-social-container">
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-linkedin"></ion-icon>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!--content-->
+    <div style="display: flex;justify-content: center;align-items: center;margin: 3rem 0;">
+      <div class="card">
+        <div class="header">
+          <div class="image">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+              <g
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                id="SVGRepo_tracerCarrier"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                  stroke="#000000"
+                  d="M20 7L9.00004 18L3.99994 13"
+                ></path>
+              </g>
+            </svg>
+          </div>
+          <div class="content">
+            <span class="title">Order validated</span>
+            <p class="message">
+              Thank you for your purchase. you package will be delivered within 2
+              days of your purchase
+            </p>
+          </div>
+          <div class="actions">
+            <a href="/orders" type="button" class="history">History</a>
+            <button type="button" class="track">Track my package</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--footer-->
+    <%- include("footer.ejs") %>
+
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+  </body>
+</html>

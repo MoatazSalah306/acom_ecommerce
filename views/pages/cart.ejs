@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acom - Cart</title>
+    <!--google font start-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <!--google font end-->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style-prefix.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <style>
+      body {
+        font-family: "Ubuntu", sans-serif;
+      }
+    </style>
+    <script src="https://www.paypal.com/sdk/js?client-id=Af2ocexPUFxOjjEZAOUnd7HNKYCgyxB-ULukhnr7FAXM1-czrMy06E1DqV1ro7Qlmb9WVh059kpMeMuN"></script>
+  </head>
+  <body>
+
+    <!-- nav -->
+    <nav aria-label="breadcrumb" style="display: flex;justify-content: center;" class="mt-5">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active d-inline"><a class="d-inline" style="color: black;font-weight: bold;" href="/home">Home</a></li>
+        <li class="breadcrumb-item d-inline"><a class="d-inline" style="color: black;font-weight: bold;" href="/products">Products</a></li>
+        <li class="breadcrumb-item active d-inline" style="color: #ff8f9c;font-weight: bold;" aria-current="page">Cart</li>
+      </ol>
+    </nav>
+
+    <!--content of cart page-->
+    <div class="px-4 px-lg-0">
+      <div class="pb-5 mt-5">
+        <div class="container">
+          <!-- <div class="row text-center p-5" style="opacity: .4;color: #FF8F9C;">
+                    <h3>Acom Cart Items</h3>
+                </div> -->
+
+          <div class="row">
+            <div class="col-lg-12 py-4 bg-white rounded shadow-sm mb-5">
+              <!-- Shopping cart table -->
+              <div class="table-responsive">
+                <table class="table text-center">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="border-0 bg-light">
+                        <div class="p-2 px-3 text-uppercase">Item</div>
+                      </th>
+                      <th scope="col" class="border-0 bg-light">
+                        <div class="py-2 text-uppercase">Price</div>
+                      </th>
+                      <th scope="col" class="border-0 bg-light">
+                        <div class="py-2 text-uppercase">Quantity</div>
+                      </th>
+                      <th scope="col" class="border-0 bg-light">
+                        <div class="py-2 text-uppercase">Remove</div>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if(total>0){ %>
+                      <% cart.forEach(function(item){ %>
+                        <tr>
+                          <th
+                            scope="row"
+                            class="border-end border-top-0 border-start-0 border-bottom-0 text-start"
+                          >
+                            <div class="p-2">
+                              <img
+                                src="images/products/<%= item.image %>"
+                                width="70"
+                                class="d-inline img-fluid rounded shadow-sm me-2"
+                              />
+                              <span
+                                ><%= item.title %> &
+                                <span style="opacity: 0.5; color: #f65164"
+                                  ><%= item.category %></span
+                                ></span
+                              >
+                            </div>
+                          </th>
+                          <% if(item.sale_price){ %>
+                          <td
+                            class="border-end border-top-0 border-start-0 border-bottom-0 align-middle"
+                          >
+                            <strong>$<%= item.sale_price %></strong>
+                          </td>
+                          <% }else{ %>
+                          <td
+                            class="border-end border-top-0 border-start-0 border-bottom-0 align-middle"
+                          >
+                            <strong>$<%= item.price %></strong>
+                          </td>
+                          <% } %>
+                          <td
+                            class="border-end border-top-0 border-start-0 border-bottom-0 align-middle"
+                          >
+                            <form class="d-inline" action="/edit_product_quantity" method="post">
+    
+                              <input type="hidden" name="id" value="<%= item.id %>">
+    
+                                <input type="submit" class="me-1 text-danger fw-bold w-25 d-inline rounded-pill border-0" name="decrement" value="-">
+                                <span><%= item.quantity %></span>
+                                <input type="submit" class="ms-1 text-success fw-bold w-25 d-inline rounded-pill border-0" name="increment" value="+">
+                        
+    
+                            </form>
+                          </td>
+                          <td
+                            class="border-0 align-middle"
+                            style="cursor: pointer; color: #ff8f9c"
+                          >
+                            <form method="post" action="/remove_product">
+                              <input type="hidden" name="id" value="<%= item.id %>">
+                              <i class="bi bi-trash"></i>
+                              <input type="submit" style="color: #ff8f9c;" value="remove" class="d-inline w-auto border-0 bg-transparent">
+                            </form>
+                          </td>
+                        </tr>
+                      <% }) %>
+                    <% }else{ %>
+                      <td colspan="4">Your cart is now empty</td>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+              <!-- End -->
+            </div>
+          </div>
+
+          <div class="row py-5 p-4 bg-white rounded shadow-sm">
+            <div class="col-lg-6">
+              <div
+                class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"
+              >
+                Coupon code
+              </div>
+              <div class="p-4">
+                <p class="font-italic mb-4">
+                  If you have a coupon code, please enter it in the box below
+                </p>
+                <div class="input-group mb-4 border rounded-pill p-2">
+                  <input
+                    type="text"
+                    placeholder="Apply coupon"
+                    aria-describedby="button-addon3"
+                    class="form-control border-0"
+                  />
+                  <div class="input-group-append border-0">
+                    <button
+                      id="button-addon3"
+                      style="background-color: #ff8f9c; border-color: #ff8f9c"
+                      type="button"
+                      class="btn btn-dark px-4 rounded-pill"
+                    >
+                      <i class="fa fa-gift mr-2"></i>Apply coupon
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"
+              >
+                Instructions for seller
+              </div>
+              <div class="p-4">
+                <p class="font-italic mb-4">
+                  If you have some information for the seller you can leave them
+                  in the box below
+                </p>
+                <textarea
+                  name=""
+                  cols="30"
+                  rows="2"
+                  class="form-control"
+                ></textarea>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div
+                class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"
+              >
+                Order summary
+              </div>
+              <div class="p-4">
+                <% if(total>0){ %>
+                  <a id="paypal-button"
+                  ></a>
+                  <p class="font-italic mb-4">
+                    Shipping and additional costs are calculated based on values
+                    you have entered.
+                  </p>
+                  <ul class="list-unstyled mb-4">
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                      <strong class="text-muted">Order Subtotal </strong
+                      ><strong>$<%= total %></strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                      <strong class="text-muted">Shipping and handling</strong
+                      ><strong>$10.00</strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                      <strong class="text-muted">Tax</strong
+                      ><strong>$0.00</strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                      <strong class="text-muted">Total</strong>
+                      <h5 class="font-weight-bold">$<%= total+10 %></h5>
+                    </li>
+                  </ul>
+                <% }else{ %>
+                  <p class="font-italic mb-4">
+                    Shipping and additional costs are calculated based on values
+                    you have entered.
+                  </p>
+                  <ul class="list-unstyled mb-4">
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                      <strong class="text-muted">Order Subtotal </strong
+                      ><strong>$<%= 0 %></strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                      <strong class="text-muted">Shipping and handling</strong
+                      ><strong>$10.00</strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                      <strong class="text-muted">Tax</strong
+                      ><strong>$0.00</strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom">
+                      <strong class="text-muted">Total</strong>
+                      <h5 class="font-weight-bold">$<%= 0+10 %></h5>
+                    </li>
+                  </ul>
+                <% } %> 
+                
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--
+        - FOOTER
+    -->
+    <footer>
+      <div class="footer-category">
+        <div class="container">
+          <h2 class="footer-category-title">Brand directory</h2>
+
+          <div class="footer-category-box">
+            <h3 class="category-box-title">Fashion :</h3>
+
+            <a href="#" class="footer-category-link">T-shirt</a>
+            <a href="#" class="footer-category-link">Shirts</a>
+            <a href="#" class="footer-category-link">shorts & jeans</a>
+            <a href="#" class="footer-category-link">jacket</a>
+            <a href="#" class="footer-category-link">dress & frock</a>
+            <a href="#" class="footer-category-link">innerwear</a>
+            <a href="#" class="footer-category-link">hosiery</a>
+          </div>
+
+          <div class="footer-category-box">
+            <h3 class="category-box-title">footwear :</h3>
+
+            <a href="#" class="footer-category-link">sport</a>
+            <a href="#" class="footer-category-link">formal</a>
+            <a href="#" class="footer-category-link">Boots</a>
+            <a href="#" class="footer-category-link">casual</a>
+            <a href="#" class="footer-category-link">cowboy shoes</a>
+            <a href="#" class="footer-category-link">safety shoes</a>
+            <a href="#" class="footer-category-link">Party wear shoes</a>
+            <a href="#" class="footer-category-link">Branded</a>
+            <a href="#" class="footer-category-link">Firstcopy</a>
+            <a href="#" class="footer-category-link">Long shoes</a>
+          </div>
+
+          <div class="footer-category-box">
+            <h3 class="category-box-title">jewellery :</h3>
+
+            <a href="#" class="footer-category-link">Necklace</a>
+            <a href="#" class="footer-category-link">Earrings</a>
+            <a href="#" class="footer-category-link">Couple rings</a>
+            <a href="#" class="footer-category-link">Pendants</a>
+            <a href="#" class="footer-category-link">Crystal</a>
+            <a href="#" class="footer-category-link">Bangles</a>
+            <a href="#" class="footer-category-link">bracelets</a>
+            <a href="#" class="footer-category-link">nosepin</a>
+            <a href="#" class="footer-category-link">chain</a>
+            <a href="#" class="footer-category-link">Earrings</a>
+            <a href="#" class="footer-category-link">Couple rings</a>
+          </div>
+
+          <div class="footer-category-box">
+            <h3 class="category-box-title">cosmetics :</h3>
+
+            <a href="#" class="footer-category-link">Shampoo</a>
+            <a href="#" class="footer-category-link">Bodywash</a>
+            <a href="#" class="footer-category-link">Facewash</a>
+            <a href="#" class="footer-category-link">makeup kit</a>
+            <a href="#" class="footer-category-link">liner</a>
+            <a href="#" class="footer-category-link">lipstick</a>
+            <a href="#" class="footer-category-link">prefume</a>
+            <a href="#" class="footer-category-link">Body soap</a>
+            <a href="#" class="footer-category-link">scrub</a>
+            <a href="#" class="footer-category-link">hair gel</a>
+            <a href="#" class="footer-category-link">hair colors</a>
+            <a href="#" class="footer-category-link">hair dye</a>
+            <a href="#" class="footer-category-link">sunscreen</a>
+            <a href="#" class="footer-category-link">skin loson</a>
+            <a href="#" class="footer-category-link">liner</a>
+            <a href="#" class="footer-category-link">lipstick</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-nav">
+        <div class="container">
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Popular Categories</h2>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Fashion</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Electronic</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Cosmetic</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Health</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Watches</a>
+            </li>
+          </ul>
+
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Products</h2>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Prices drop</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">New products</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Best sales</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Contact us</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Sitemap</a>
+            </li>
+          </ul>
+
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Our Company</h2>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Delivery</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Legal Notice</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Terms and conditions</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">About us</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Secure payment</a>
+            </li>
+          </ul>
+
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Services</h2>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Prices drop</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">New products</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Best sales</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Contact us</a>
+            </li>
+
+            <li class="footer-nav-item">
+              <a href="#" class="footer-nav-link">Sitemap</a>
+            </li>
+          </ul>
+
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Contact</h2>
+            </li>
+
+            <li class="footer-nav-item flex">
+              <div class="icon-box">
+                <ion-icon name="location-outline"></ion-icon>
+              </div>
+
+              <address class="content">
+                419 State 414 Rte Beaver Dams, New York(NY), 14812, USA
+              </address>
+            </li>
+
+            <li class="footer-nav-item flex">
+              <div class="icon-box">
+                <ion-icon name="call-outline"></ion-icon>
+              </div>
+
+              <a href="tel:+607936-8058" class="footer-nav-link"
+                >(607) 936-8058</a
+              >
+            </li>
+
+            <li class="footer-nav-item flex">
+              <div class="icon-box">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+
+              <a href="mailto:example@gmail.com" class="footer-nav-link"
+                >example@gmail.com</a
+              >
+            </li>
+          </ul>
+
+          <ul class="footer-nav-list">
+            <li class="footer-nav-item">
+              <h2 class="nav-title">Follow Us</h2>
+            </li>
+
+            <li>
+              <ul class="social-link">
+                <li class="footer-nav-item">
+                  <a href="#" class="footer-nav-link">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                  </a>
+                </li>
+
+                <li class="footer-nav-item">
+                  <a href="#" class="footer-nav-link">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                  </a>
+                </li>
+
+                <li class="footer-nav-item">
+                  <a href="#" class="footer-nav-link">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                  </a>
+                </li>
+
+                <li class="footer-nav-item">
+                  <a href="#" class="footer-nav-link">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="container">
+          <img
+            src="images/payment.png"
+            alt="payment method"
+            class="payment-img"
+          />
+
+          <p class="copyright">
+            Copyright &copy; <a href="#">Acom</a> all rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      window.paypal.Buttons({
+        createOrder: (data,actions)=>{
+          return actions.order.create({
+            purchase_units:[{
+              amount:{
+                value: "<%= total+10 %>",
+              }
+            }]
+          })
+        },
+        onApprove: (data,actions)=>{
+          return actions.order.capture().then((details)=>{
+            alert("thanks for paying from Acom store !" + details.payer.name.given_name);
+            window.location.href = "http://localhost:5001/thanks";
+          });
+        }
+      }).render("#paypal-button")
+    </script>
+  </body>
+</html>
